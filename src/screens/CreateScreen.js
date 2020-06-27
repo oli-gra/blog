@@ -1,10 +1,14 @@
-import React, { useContext } from 'react';
-import { Component } from 'react';
+import React, { useContext, useState } from 'react';
+import { Context } from '../context/BlogContext';
+import BlogPostScreen from '../components/BlogPostForm'
 
-const CreateScreen = () => {
-  return <View>
-    <Text>Create Screen</Text>
-  </View>
+const CreateScreen = ({ navigation }) => {
+
+  const { addBlogPost } = useContext(Context)
+
+  return <BlogPostScreen onSubmit={(title, content) => {
+    addBlogPost(title, content, () => navigation.navigate('Index'))
+  }} />
 }
 
-export default CreateScreen;
+export default CreateScreen

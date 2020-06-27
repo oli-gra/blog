@@ -2,13 +2,13 @@ import React, { useContext } from 'react'
 import { View, Text, StyleSheet, FlatList, Button, TouchableOpacity } from 'react-native'
 import { Context } from '../context/BlogContext'
 import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
 const IndexScreen = ({ navigation }) => {
-  const { state, addBlogPost, deleteBlogPost } = useContext(Context);
+  const { state, deleteBlogPost } = useContext(Context);
 
   return (
     <View>
-      <Button title="Add Post" onPress={addBlogPost} />
       <FlatList
         data={state}
         keyExtractor={blogPost => blogPost.title}
@@ -27,6 +27,16 @@ const IndexScreen = ({ navigation }) => {
       />
     </View>
   )
+}
+
+IndexScreen.navigationOptions = ({ navigation }) => {
+  return {
+    headerRight: () => (
+      <TouchableOpacity onPress={() => navigation.navigate('Create')}>
+        <Ionicons name="ios-add-circle" size={24} color="black" />
+      </TouchableOpacity>
+    ),
+  };
 }
 
 const styles = StyleSheet.create({
